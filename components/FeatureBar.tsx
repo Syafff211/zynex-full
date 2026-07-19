@@ -1,6 +1,8 @@
 // components/FeatureBar.tsx
 "use client";
+
 import { motion } from "framer-motion";
+import type { Variants } from "framer-motion";
 
 const features = [
   { n: "01", t: "MODERN DESIGN", d: "Premium UI crafted for startups." },
@@ -9,8 +11,9 @@ const features = [
   { n: "04", t: "FULL SUPPORT", d: "Lifetime consultation." },
 ];
 
-// GANTI INI JUGA: Pakai "easeOut"
-const fadeUp = {
+// FIX FINAL: Tambahkan 'as const satisfies Variants' atau cast tipe manual
+// Ini cara paling ampuh biar TS gak ngambek
+const fadeUp: Variants = {
   hidden: { opacity: 0, y: 40 },
   show: (i = 0) => ({
     opacity: 1,
@@ -18,7 +21,7 @@ const fadeUp = {
     transition: {
       duration: 0.9,
       delay: 0.1 * i,
-      ease: "easeOut", // <--- PERUBAHAN DI SINI
+      ease: "easeOut" as const, // Cast ke const agar aman
     },
   }),
 };
@@ -26,6 +29,7 @@ const fadeUp = {
 export default function FeatureBar() {
   return (
     <div className="fixed bottom-0 z-20 w-full px-8 pb-8 md:px-14">
+      {/* Feature cards */}
       <div className="mb-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.06] md:grid-cols-4">
         {features.map((f, i) => (
           <motion.div
@@ -47,6 +51,7 @@ export default function FeatureBar() {
         ))}
       </div>
 
+      {/* Bottom row */}
       <motion.div
         variants={fadeUp}
         initial="hidden"
@@ -55,10 +60,12 @@ export default function FeatureBar() {
         className="flex items-center justify-between text-[10px] tracking-wide2 text-white/55"
       >
         <span>50+ COMPLETED PROJECTS</span>
+
         <div className="flex flex-col items-center gap-2 text-ivory">
           <span>SCROLL</span>
           <span className="h-6 w-px animate-pulse bg-accent" />
         </div>
+
         <div className="flex items-center gap-2">
           <span className="h-px w-8 bg-ivory" />
           <span className="h-px w-4 bg-white/25" />
