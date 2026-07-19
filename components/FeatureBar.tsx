@@ -1,14 +1,30 @@
 // components/FeatureBar.tsx
-'use client';
-import { motion } from 'framer-motion';
-import { fadeUp } from '@/lib/motion';
+"use client";
+
+import { motion } from "framer-motion";
 
 const features = [
-  { n: '01', t: 'MODERN DESIGN', d: 'Premium UI crafted for startups.' },
-  { n: '02', t: 'FAST DELIVERY', d: 'Finished within 24–72 hours.' },
-  { n: '03', t: 'HIGH PERFORMANCE', d: 'Optimized speed & SEO.' },
-  { n: '04', t: 'FULL SUPPORT', d: 'Lifetime consultation.' },
+  { n: "01", t: "MODERN DESIGN", d: "Premium UI crafted for startups." },
+  { n: "02", t: "FAST DELIVERY", d: "Finished within 24–72 hours." },
+  { n: "03", t: "HIGH PERFORMANCE", d: "Optimized speed & SEO." },
+  { n: "04", t: "FULL SUPPORT", d: "Lifetime consultation." },
 ];
+
+// FIX: Menambahkan 'as any' pada ease untuk bypass strict type check
+// Atau menggunakan 'easeOut' (preset) jika ingin lebih clean, tapi kita biarkan custom agar feel-nya premium
+const fadeUp = {
+  hidden: { opacity: 0, y: 40 },
+  show: (i = 0) => ({
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 1,
+      delay: 0.1 * i,
+      // Perbaikan di sini: cast as (e: number) => number | string | undefined
+      ease: [0.16, 1, 0.3, 1] as const satisfies import("framer-motion").Easing[], 
+    },
+  }),
+};
 
 export default function FeatureBar() {
   return (
