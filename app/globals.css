@@ -1594,3 +1594,12 @@ a:focus-visible {
 .dash-card-wide {
   width: 100%;
 }
+/* Pastikan body bisa discroll karena sebelumnya kita set min-h-screen */
+html, body {
+  scroll-behavior: smooth !important; /* Agar klik link navbar scroll halus */
+}
+
+/* Reset margin padding jika ada yang bikin gap aneh */
+section {
+  scroll-margin-top: 100px; /* Biar pas diklik navbar, judulnya gak ketutup header */
+}
