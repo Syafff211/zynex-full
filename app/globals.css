@@ -1603,3 +1603,7 @@ html, body {
 section {
   scroll-margin-top: 100px; /* Biar pas diklik navbar, judulnya gak ketutup header */
 }
+.admin-notice { border-color: rgba(244,160,160,.4); }
+.admin-notice h2 { margin: 0 0 8px; color: var(--ivory); font-family: var(--font-space), sans-serif; font-size: 14px; letter-spacing: .12em; }
+.admin-notice p { margin: 0; color: var(--muted); font-size: 12px; line-height: 1.7; }
+.admin-notice code { color: #f4a0a0; font-size: 11px; }
