@@ -1,5 +1,5 @@
+// components/FeatureBar.tsx
 "use client";
-
 import { motion } from "framer-motion";
 
 const features = [
@@ -9,38 +9,62 @@ const features = [
   { n: "04", t: "FULL SUPPORT", d: "Lifetime consultation." },
 ];
 
+// GANTI INI JUGA: Pakai "easeOut"
 const fadeUp = {
-  hidden: { opacity: 0, y: 28 },
-  show: (i: number = 0) => ({
+  hidden: { opacity: 0, y: 40 },
+  show: (i = 0) => ({
     opacity: 1,
     y: 0,
     transition: {
       duration: 0.9,
-      delay: 0.08 * i,
-      ease: [0.16, 1, 0.3, 1] as const,   // ← KUNCI: as const
+      delay: 0.1 * i,
+      ease: "easeOut", // <--- PERUBAHAN DI SINI
     },
   }),
 };
 
 export default function FeatureBar() {
   return (
-    <section className="feature-bar" aria-label="Studio highlights">
-      {features.map((f, i) => (
-        <motion.article
-          key={f.n}
-          className="feature-item"
-          variants={fadeUp}
-          initial="hidden"
-          animate="show"
-          custom={11 + i}
-        >
-          <span className="feature-number">{f.n}</span>
-          <div>
-            <h2>{f.t}</h2>
-            <p>{f.d}</p>
-          </div>
-        </motion.article>
-      ))}
-    </section>
+    <div className="fixed bottom-0 z-20 w-full px-8 pb-8 md:px-14">
+      <div className="mb-6 grid grid-cols-2 gap-px overflow-hidden rounded-2xl border border-white/[0.06] md:grid-cols-4">
+        {features.map((f, i) => (
+          <motion.div
+            key={f.n}
+            variants={fadeUp}
+            initial="hidden"
+            animate="show"
+            custom={11 + i}
+            className="glass rounded-none px-6 py-5"
+          >
+            <span className="text-[11px] tracking-wide2 text-accent">{f.n}</span>
+            <h3 className="mt-2 font-display text-xs font-semibold tracking-wide2 text-ivory">
+              {f.t}
+            </h3>
+            <p className="mt-1.5 text-[11px] leading-relaxed text-white/55">
+              {f.d}
+            </p>
+          </motion.div>
+        ))}
+      </div>
+
+      <motion.div
+        variants={fadeUp}
+        initial="hidden"
+        animate="show"
+        custom={16}
+        className="flex items-center justify-between text-[10px] tracking-wide2 text-white/55"
+      >
+        <span>50+ COMPLETED PROJECTS</span>
+        <div className="flex flex-col items-center gap-2 text-ivory">
+          <span>SCROLL</span>
+          <span className="h-6 w-px animate-pulse bg-accent" />
+        </div>
+        <div className="flex items-center gap-2">
+          <span className="h-px w-8 bg-ivory" />
+          <span className="h-px w-4 bg-white/25" />
+          <span className="h-px w-4 bg-white/25" />
+        </div>
+      </motion.div>
+    </div>
   );
 }
