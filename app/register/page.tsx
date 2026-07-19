@@ -1,18 +1,18 @@
 import Link from "next/link";
-import { redirect } from "next/navigation";
 import RegisterForm from "@/components/RegisterForm";
 
 export const metadata = {
   title: "Register — Zynex Studio",
 };
 
-export default async function RegisterPage() {
-  // Cek apakah sudah login (middleware mungkin belum jalan sempurna untuk preview)
+export default function RegisterPage() {
   return (
     <div className="auth-shell">
+      {/* Background Elements */}
       <div className="auth-bg-grid" aria-hidden="true" />
-      <div className="auth-glow" aria-hidden="true"
+      <div className="auth-glow" aria-hidden="true" />
 
+      {/* Logo */}
       <Link href="/" className="auth-logo">
         <span className="brand-mark">
           <span />
@@ -21,6 +21,7 @@ export default async function RegisterPage() {
         ZYNEX STUDIO
       </Link>
 
+      {/* Main Card */}
       <div className="auth-card">
         <div className="auth-header">
           <span className="auth-eyebrow">— CREATE ACCOUNT</span>
@@ -36,6 +37,7 @@ export default async function RegisterPage() {
         </p>
       </div>
 
+      {/* Footer Info */}
       <div className="auth-bottom">
         <span>© 2025 ZYNEX STUDIO</span>
         <span>SECURE SIGNUP</span>
